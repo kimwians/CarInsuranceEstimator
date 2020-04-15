@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:id="@+id/activity_main_root">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorToolbar">
+
+        <Button
+            android:id="@+id/buttonEstimate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Estimate"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="50dp"/>
+
+        <Button
+            android:id="@+id/buttonClientList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Client List"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="50dp"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name:"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/editName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_below="@id/textName"
+                android:ems="15"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"/>
+
+            <TextView
+                android:id="@+id/textAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age:"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_below="@id/editName"
+                android:layout_marginTop="15dp"/>
+
+            <EditText
+                android:id="@+id/editAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/textAge"
+                android:layout_marginStart="10dp"
+                android:layout_alignBaseline="@id/textAge"
+                android:layout_below="@id/editName"
+                android:ems="3"
+                android:imeOptions="actionNext"
+                android:inputType="number"/>
+
+            <RadioGroup
+                android:id="@+id/rgGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_toEndOf="@id/editAge"
+                android:layout_marginStart="11dp"
+                android:layout_alignTop="@+id/textAge"
+                android:layout_below="@id/editName">
+
+                <RadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/rbFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_weight="1"
+                    android:text="Female" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textMarriageStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/textAge"
+                android:text="Marriage Status:"/>
+
+            <RadioGroup
+                android:id="@+id/rgMarriageStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_toEndOf="@id/textMarriageStatus"
+                android:layout_alignBottom="@id/textMarriageStatus"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_below="@id/textAge">
+
+                <RadioButton
+                    android:id="@+id/rbSingle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Single"/>
+
+                <RadioButton
+                    android:id="@+id/rbMarried"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:text="Married"/>
+
+                <RadioButton
+                    android:id="@+id/rbDivorced"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:text="Divorced"/>
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textMarriageStatus"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Address:"/>
+
+            <EditText
+                android:id="@+id/editAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textAddress"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:ems="15"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"/>
+
+            <EditText
+                android:id="@+id/editCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editAddress"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:ems="8"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"/>
+
+            <EditText
+                android:id="@+id/editState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editAddress"
+                android:layout_toEndOf="@id/editCity"
+                android:ems="2"
+                android:imeOptions="actionNext"
+                android:inputType="textCapCharacters"/>
+
+            <EditText
+                android:id="@+id/editZip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editAddress"
+                android:layout_toEndOf="@id/editState"
+                android:ems="5"
+                android:imeOptions="actionDone"
+                android:inputType="number"/>
+
+            <TextView
+                android:id="@+id/textValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editCity"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Value of Vehicle:"/>
+
+            <RadioGroup
+                android:id="@+id/rgValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/editCity"
+                android:layout_toEndOf="@id/textValue"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp">
+
+                <RadioButton
+                    android:id="@+id/rbValueLow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="less than $5,000"/>
+
+                <RadioButton
+                    android:id="@+id/rbValueMid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="between $5,000 and $40,000"/>
+
+                <RadioButton
+                    android:id="@+id/rbValueHigh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="more than $40,000"/>
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rgValue"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="50dp"
+                android:text="Monthly Insurance Rate:"/>
+
+            <TextView
+                android:id="@+id/textEstimate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rgValue"
+                android:layout_toEndOf="@id/textRate"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="50dp"
+                android:layout_alignBaseline="@id/textRate"
+                android:textColor="@color/system_black"
+                android:textSize="@dimen/text_size_large"
+                android:text=""/>
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save Customer Info"
+                android:layout_below="@id/textEstimate"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="50dp"/>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
