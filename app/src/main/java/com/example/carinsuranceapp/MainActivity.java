@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         initListButton();
         initSaveButton();
+        initGetEstimateButton();
         initTextChangedEvents();
 
         Bundle extras = getIntent().getExtras();
@@ -149,6 +150,86 @@ public class MainActivity extends AppCompatActivity {
         }
 
         textMonthlyRate.setText(currentClient.getMonthlyRate());
+    }
+
+    private void initGetEstimateButton() {
+        Button getEstimateButton = findViewById(R.id.buttonEstimate);
+        getEstimateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyboard();
+
+                int[] current = getArray(currentClient);
+                int[] monthlyRates = new int[3];
+
+                ClientDataSource ds = new ClientDataSource(MainActivity.this);
+                try {
+                    ds.open();
+                    monthlyRates = ds.findNearestNeighbors(current);
+                    ds.close();
+                } catch (Exception e) {
+                    Log.w(MainActivity.class.getName(), "Failed to find nearest neightbors");
+                }
+
+                int monthlyRate = getMonthlyRate(monthlyRates);
+
+                TextView txtMonthlyRate = findViewById(R.id.textEstimate);
+                txtMonthlyRate.setText(Integer.toString(monthlyRate));
+            }
+        });
+    }
+
+    // array values will be used to find k-nearest neighbors
+    static int[] getArray(Client c) {
+        int[] arr = new int[4];
+        arr[0] = Integer.parseInt(c.getAge());
+        if (c.getGender().equalsIgnoreCase("M")) {
+            arr[1] = 6;
+        }
+        else {
+            arr[1] = 3;
+        }
+
+        if (c.getMarriageStatus().equalsIgnoreCase("single")) {
+            arr[2] = 2;
+        }
+        else if (c.getMarriageStatus().equalsIgnoreCase("married")) {
+            arr[2] = 1;
+        }
+        else {
+            arr[2] = 4;
+        }
+
+        if (c.getValue().equalsIgnoreCase("low")) {
+            arr[3] = 4;
+        }
+        else if (c.getValue().equalsIgnoreCase("mid")) {
+            arr[3] = 2;
+        }
+        else {
+            arr[3] = 8;
+        }
+        return arr;
+    }
+
+    static double findDistance(int[] arr1, int[] arr2) {
+        double distance;
+        double sum = 0.0;
+        for (int i = 0; i < arr1.length; i++) {
+            sum += Math.pow(arr1[i] - arr2[i], 2);
+        }
+        distance = Math.sqrt(sum);
+        return distance;
+    }
+
+    private int getMonthlyRate(int[] arr) {
+        int avg;
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        avg = sum / arr.length;
+        return avg;
     }
 
     private void initTextChangedEvents() {

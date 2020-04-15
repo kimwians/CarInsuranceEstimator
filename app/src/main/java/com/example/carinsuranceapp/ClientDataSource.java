@@ -161,4 +161,64 @@ public class ClientDataSource {
         }
         return client;
     }
+
+    // find 3 nearest neighbors - 3 smallest distances
+    public int[] findNearestNeighbors(int[] arr1) {
+        int[] monthlyRates = new int[3];
+        double min = 1000.0;
+        double min2 = 1000.0;
+        double min3 = 1000.0;
+
+        try {
+            String query = "SELECT * FROM client";
+            Cursor cursor = database.rawQuery(query, null);
+
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Client client = new Client();
+                client.setClientID(cursor.getInt(0));
+                client.setClientName(cursor.getString(1));
+                client.setAge(cursor.getString(2));
+                client.setGender(cursor.getString(3));
+                client.setMarriageStatus(cursor.getString(4));
+                client.setAddress(cursor.getString(5));
+                client.setCity(cursor.getString(6));
+                client.setState(cursor.getString(7));
+                client.setZip(cursor.getString(8));
+                client.setValue(cursor.getString(9));
+                client.setMonthlyRate(cursor.getString(10));
+
+                int[] arr2 = MainActivity.getArray(client);
+                double distance = MainActivity.findDistance(arr1, arr2);
+
+                if (distance < min) {
+                    min3 = min2;
+                    min2 = min;
+                    min = distance;
+
+                    monthlyRates[2] = monthlyRates[1];
+                    monthlyRates[1] = monthlyRates[0];
+                    monthlyRates[0] = Integer.parseInt(client.getMonthlyRate());
+                }
+                else if (distance < min2) {
+                    min3 = min2;
+                    min2 = distance;
+
+                    monthlyRates[2] = monthlyRates[1];
+                    monthlyRates[1] = Integer.parseInt(client.getMonthlyRate());
+                }
+                else if (distance < min3) {
+                    min3 = distance;
+                    monthlyRates[2] = Integer.parseInt(client.getMonthlyRate());
+                }
+
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        catch (Exception e) {
+            Log.w(ClientDataSource.class.getName(), "Failed to get clients");
+        }
+        return monthlyRates;
+    }
 }
